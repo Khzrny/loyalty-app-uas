@@ -5,6 +5,8 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -43,3 +45,7 @@ Route::post('/redeem/{id}', [RedeemController::class, 'redeem'])
 
 Route::get('/redeem-history', [RedeemController::class, 'history'])
     ->name('redeem.history');
+
+Route::get('/admin', [AdminController::class, 'dashboard']);
+
+Route::get('/admin/laporan', [ReportController::class, 'index']);    
