@@ -10,4 +10,5 @@
     <br><br>
 
     <button type="submit">Login</button>
+    <a href="/register"><button type="button">Register</button></a>
 </form>
