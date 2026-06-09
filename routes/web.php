@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\MembershipController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -48,4 +50,8 @@ Route::get('/redeem-history', [RedeemController::class, 'history'])
 
 Route::get('/admin', [AdminController::class, 'dashboard']);
 
-Route::get('/admin/laporan', [ReportController::class, 'index']);    
+Route::get('/admin/laporan', [ReportController::class, 'index']);
+
+Route::get('/points', [PointController::class, 'index']);
+
+Route::get('/membership', [MembershipController::class, 'index']);    
