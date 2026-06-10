@@ -171,90 +171,128 @@
 
 <div class="navbar">
     <span>Welcome, {{ $user->name }}!</span>
-    <span class="point">⭐ Point:</span>
+    <span class="point">Point:</span>
 </div>
 
 <div class="layout">
 
     <div class="sidebar">
         <a href="/profile" class="active">
-            <span class="icon">🏠</span> Home
+            <span class="icon"></span> Home
         </a>
         <hr class="divider">
-        <a href="/transaksi">
-            <span class="icon">🛒</span> Transaksi
+        <a href="/riwayat-transaksi">
+            <span class="icon"></span> Transaksi
         </a>
         <a href="/rewards">
-            <span class="icon">🎁</span> Rewards
+            <span class="icon"></span> Rewards
         </a>
         <a href="/redeem">
-            <span class="icon">🎫</span> Redeem
+            <span class="icon"></span> Redeem
         </a>
     </div>
 
     <div class="content">
         <h2>Best Seller !!</h2>
-        <div class="product-grid">
+       <div class="product-grid">
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Milk</h3>
-                    <p>Rp 8.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Milk</h3>
+            <p>Rp 8.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Milk">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="8000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Sugar</h3>
-                    <p>Rp 10.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Sugar</h3>
+            <p>Rp 10.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Sugar">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="10000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Latte</h3>
-                    <p>Rp 12.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Latte</h3>
+            <p>Rp 12.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Latte">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="12000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Sugar</h3>
-                    <p>Rp 10.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Sugar</h3>
+            <p>Rp 10.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Sugar">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="10000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Milk</h3>
-                    <p>Rp 8.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Milk</h3>
+            <p>Rp 8.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Milk">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="8000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
-                <div class="info">
-                    <h3>Coffe Latte</h3>
-                    <p>Rp 12.000</p>
-                    <span class="point-badge">⭐ 10 Point</span><br>
-                    <button type="button">Beli</button>
-                </div>
-            </div>
+    <div class="product-card">
+        <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
+        <div class="info">
+            <h3>Coffe Latte</h3>
+            <p>Rp 12.000</p>
+            <span class="point-badge">10 Point</span><br>
+            <form action="{{ route('transaksi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Latte">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="price[]" value="12000">
+                <button type="submit">Beli</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 
         </div>
     </div>
