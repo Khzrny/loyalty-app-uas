@@ -181,7 +181,7 @@
             <span class="icon">🏠</span> Home
         </a>
         <hr class="divider">
-        <a href="/transactions">
+        <a href="/transaksi">
             <span class="icon">🛒</span> Transaksi
         </a>
         <a href="/rewards">
