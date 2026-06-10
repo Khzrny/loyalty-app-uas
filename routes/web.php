@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -55,3 +57,11 @@ Route::get('/admin/laporan', [ReportController::class, 'index']);
 Route::get('/points', [PointController::class, 'index']);
 
 Route::get('/membership', [MembershipController::class, 'index']);    
+
+Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
+
+Route::post('/transaksi', [TransactionController::class, 'store'])->name('transaksi.store');
+
+Route::get('/riwayat-transaksi', [TransactionController::class, 'riwayat'])->name('riwayat.index');
+
+Route::get('/checkout/{id}', [CheckoutController::class, 'checkout'])->name('checkout');
