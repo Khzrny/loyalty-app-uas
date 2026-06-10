@@ -18,16 +18,12 @@ class CheckoutController extends Controller
                 ->with('error', 'Transaksi sudah di-checkout.');
         }
 
-        // Hitung point: setiap Rp10.000 = 1 point
-        $point = floor($transaction->total_price / 10000);
+        $point = $transaction->total_point;
 
-        // Update status transaksi
         $transaction->update([
-            'status'      => 'completed',
-            'total_point' => $point,
+        'status' => 'completed',
         ]);
 
-        // Tambah point ke user
         $user = Auth::user();
         $user->increment('point', $point);
 
