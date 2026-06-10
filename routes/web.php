@@ -48,4 +48,4 @@ Route::get('/redeem-history', [RedeemController::class, 'history'])
 
 Route::get('/admin', [AdminController::class, 'dashboard']);
 
-Route::get('/admin/laporan', [ReportController::class, 'index']);    
+Route::get('/admin/laporan', [ReportController::class, 'index']);
