@@ -116,7 +116,7 @@
 
 <div class="navbar">
     <span>Riwayat Transaksi</span>
-    <span class="point">⭐ Point: {{ auth()->user()->point }}</span>
+    <a href="/points" class="point">Point: {{ Auth::user()->point ?? 0 }}</a>
 </div>
 
 <div class="layout">
@@ -126,7 +126,7 @@
             <span class="icon"></span> Home
         </a>
         <hr class="divider">
-        <a href="/riwayat-transaksi">
+        <a href="/riwayat-transaksi" class="active">
             <span class="icon"></span> Transaksi
         </a>
         <a href="/rewards">
@@ -134,6 +134,9 @@
         </a>
         <a href="/redeem">
             <span class="icon"></span> Redeem
+        </a>
+        <a href="/membership">
+            <span class="icon"></span> Membership
         </a>
     </div>
 
