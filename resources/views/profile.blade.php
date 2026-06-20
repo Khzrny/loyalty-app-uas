@@ -34,7 +34,6 @@
             background-color: #f39c12;
             padding: 5px 12px;
             border-radius: 20px;
-            /* Tambahan agar warna teks tetap putih dan tidak ada garis bawah saat menjadi link */
             color: white;
             text-decoration: none;
         }
@@ -172,6 +171,11 @@
 </head>
 <body>
 
+@php
+    $level = Auth::user()->membership_level ?? 'Bronze';
+    $discount = ($level == 'Gold') ? 0.45 : (($level == 'Silver') ? 0.25 : 0);
+@endphp
+
 <div class="navbar">
     <span>Welcome, {{ $user->name }}!</span>
     <a href="/points" class="point">Point: {{ Auth::user()->point ?? 0 }}</a>
@@ -199,20 +203,29 @@
     </div>
 
     <div class="content">
-        <h2>Best Seller !!</h2>
+        <h2>Best Seller !! (Tier: {{ $level }})</h2>
        <div class="product-grid">
 
+    {{-- Fungsi Helper untuk menghitung diskon --}}
+    @php
+        function getPrice($base, $discount) { return $base * (1 - $discount); }
+    @endphp
+
     <div class="product-card">
         <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Milk</h3>
-            <p>Rp 8.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 8.000</del><br>Rp {{ number_format(getPrice(8000, $discount)) }}</p>
+            @else
+                <p>Rp 8.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Milk">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="8000">
+                <input type="hidden" name="price[]" value="{{ getPrice(8000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
@@ -222,13 +235,17 @@
         <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Sugar</h3>
-            <p>Rp 10.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 10.000</del><br>Rp {{ number_format(getPrice(10000, $discount)) }}</p>
+            @else
+                <p>Rp 10.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Sugar">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="10000">
+                <input type="hidden" name="price[]" value="{{ getPrice(10000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
@@ -238,13 +255,17 @@
         <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Latte</h3>
-            <p>Rp 12.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 12.000</del><br>Rp {{ number_format(getPrice(12000, $discount)) }}</p>
+            @else
+                <p>Rp 12.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Latte">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="12000">
+                <input type="hidden" name="price[]" value="{{ getPrice(12000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
@@ -254,13 +275,17 @@
         <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Sugar</h3>
-            <p>Rp 10.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 10.000</del><br>Rp {{ number_format(getPrice(10000, $discount)) }}</p>
+            @else
+                <p>Rp 10.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Sugar">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="10000">
+                <input type="hidden" name="price[]" value="{{ getPrice(10000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
@@ -270,13 +295,17 @@
         <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Milk</h3>
-            <p>Rp 8.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 8.000</del><br>Rp {{ number_format(getPrice(8000, $discount)) }}</p>
+            @else
+                <p>Rp 8.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Milk">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="8000">
+                <input type="hidden" name="price[]" value="{{ getPrice(8000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
@@ -286,13 +315,17 @@
         <img src="{{ asset('images/kopi2.jpg') }}" alt="Kopi">
         <div class="info">
             <h3>Coffe Latte</h3>
-            <p>Rp 12.000</p>
+            @if($discount > 0)
+                <p><del style="color:#999; font-size:11px;">Rp 12.000</del><br>Rp {{ number_format(getPrice(12000, $discount)) }}</p>
+            @else
+                <p>Rp 12.000</p>
+            @endif
             <span class="point-badge">10 Point</span><br>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_name[]" value="Coffe Latte">
                 <input type="hidden" name="qty[]" value="1">
-                <input type="hidden" name="price[]" value="12000">
+                <input type="hidden" name="price[]" value="{{ getPrice(12000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
         </div>
