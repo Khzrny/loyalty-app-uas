@@ -34,6 +34,9 @@
             background-color: #f39c12;
             padding: 5px 12px;
             border-radius: 20px;
+            /* Tambahan agar warna teks tetap putih dan tidak ada garis bawah saat menjadi link */
+            color: white;
+            text-decoration: none;
         }
 
         .layout {
@@ -171,7 +174,7 @@
 
 <div class="navbar">
     <span>Welcome, {{ $user->name }}!</span>
-    <span class="point">Point:</span>
+    <a href="/points" class="point">Point: {{ $user->point ?? 0 }}</a>
 </div>
 
 <div class="layout">
@@ -189,6 +192,9 @@
         </a>
         <a href="/redeem">
             <span class="icon"></span> Redeem
+        </a>
+        <a href="/membership">
+            <span class="icon"></span> Membership
         </a>
     </div>
 
