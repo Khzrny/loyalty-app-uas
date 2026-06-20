@@ -22,9 +22,19 @@
         .tier-box { flex: 1; min-width: 250px; padding: 30px; border-radius: 15px; text-align: center; background: white; border: 2px solid #ddd; }
         .tier-active { border-color: #f39c12; background: #fffdf0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         button.subscribe-btn { padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+        
+        /* Tombol Logout */
+        .logout-btn { position: fixed; bottom: 20px; right: 20px; }
+        .logout-btn button { padding: 8px 16px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
+
+@php
+    $levels = ['Bronze' => 1, 'Silver' => 2, 'Gold' => 3];
+    $currentUserLevel = Auth::user()->membership_level ?? 'Bronze';
+    $userRank = $levels[$currentUserLevel] ?? 1;
+@endphp
 
 <div class="navbar">
     <span>Welcome, {{ Auth::user()->name }}!</span>
@@ -45,42 +55,50 @@
         <h2>Pilih Paket Langganan Kamu</h2>
         
         <div class="tiers-container">
-            <div class="tier-box {{ Auth::user()->membership_level == 'Bronze' ? 'tier-active' : '' }}">
+            {{-- Bronze --}}
+            <div class="tier-box {{ $userRank == 1 ? 'tier-active' : '' }}">
                 <h3>Bronze</h3>
                 <p>Rp 0 / bulan</p>
                 <p>Fitur Standar</p>
-                @if(Auth::user()->membership_level == 'Bronze') <strong style="color: #f39c12; display:block; margin-top:10px;">Aktif</strong> @endif
+                @if($userRank == 1) <strong style="color: #f39c12; display:block; margin-top:10px;">Sudah Berlangganan</strong> @endif
             </div>
 
-            <div class="tier-box {{ Auth::user()->membership_level == 'Silver' ? 'tier-active' : '' }}">
+            {{-- Silver --}}
+            <div class="tier-box {{ $userRank == 2 ? 'tier-active' : '' }}">
                 <h3>Silver</h3>
                 <p>Rp 50.000 / bulan</p>
-                <p>Fitur Lebih Lengkap</p>
-                @if(Auth::user()->membership_level !== 'Silver')
-                    <form action="/subscribe/Silver" method="POST">
-                        @csrf
+                <p>25% lebih murah</p>
+                @if($userRank < 2)
+                    <form action="/membership/confirm/Silver" method="GET">
                         <button class="subscribe-btn" type="submit">Berlangganan</button>
                     </form>
-                @else
-                    <strong style="color: #f39c12; display:block; margin-top:10px;">Aktif</strong>
+                @elseif($userRank == 2)
+                    <strong style="color: #f39c12; display:block; margin-top:10px;">Sudah Berlangganan</strong>
                 @endif
             </div>
 
-            <div class="tier-box {{ Auth::user()->membership_level == 'Gold' ? 'tier-active' : '' }}">
+            {{-- Gold --}}
+            <div class="tier-box {{ $userRank == 3 ? 'tier-active' : '' }}">
                 <h3>Gold</h3>
                 <p>Rp 100.000 / bulan</p>
-                <p>Fitur VIP & Cashback</p>
-                @if(Auth::user()->membership_level !== 'Gold')
-                    <form action="/subscribe/Gold" method="POST">
-                        @csrf
+                <p>45% lebih murah</p>
+                @if($userRank < 3)
+                    <form action="/membership/confirm/Gold" method="GET">
                         <button class="subscribe-btn" type="submit">Berlangganan</button>
                     </form>
-                @else
-                    <strong style="color: #f39c12; display:block; margin-top:10px;">Aktif</strong>
+                @elseif($userRank == 3)
+                    <strong style="color: #f39c12; display:block; margin-top:10px;">Sudah Berlangganan</strong>
                 @endif
             </div>
         </div>
     </div>
+</div>
+
+<div class="logout-btn">
+    <form method="POST" action="/logout">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </div>
 
 </body>
