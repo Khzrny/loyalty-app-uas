@@ -12,6 +12,7 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CheckoutController;
 
+
 Route::get('/', function () { return redirect('/login'); });
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -27,6 +28,10 @@ Route::get('/rewards', [RewardController::class, 'index'])->name('rewards.index'
 Route::post('/rewards/store', [RewardController::class, 'store'])->name('rewards.store');
 Route::post('/redeem/{id}', [RedeemController::class, 'redeem'])->name('redeem.reward');
 Route::get('/redeem-history', [RedeemController::class, 'history'])->name('redeem.history');
+
+// Rute Redeem Baru
+Route::get('/redeem', [RedeemController::class, 'index'])->name('redeem.index');
+Route::post('/redeem', [RedeemController::class, 'process'])->name('redeem.process');
 
 Route::get('/admin', [AdminController::class, 'dashboard']);
 Route::get('/admin/laporan', [ReportController::class, 'index']);

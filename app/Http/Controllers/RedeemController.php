@@ -2,29 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Redeem;
-use App\Models\Reward;
 use Illuminate\Http\Request;
+use App\Models\RedeemCode;
+use Illuminate\Support\Facades\Auth;
 
 class RedeemController extends Controller
 {
-    public function redeem($id)
-    {
-        $reward = Reward::findOrFail($id);
-
-        Redeem::create([
-            'user_name' => 'Arkan',
-            'reward_id' => $reward->id,
-            'points_used' => $reward->point_required
-        ]);
-
-        return redirect()->back()->with('success', 'Reward berhasil diredeem');
+    public function index() {
+        return view('redeem'); 
     }
 
-    public function history()
-    {
-        $redeems = Redeem::with('reward')->latest()->get();
+    public function process(Request $request) {
+      
+        $redeem = RedeemCode::where('code', $request->code)->where('is_used', false)->first();
 
-        return view('redeem-history', compact('redeems'));
+       
+        if ($redeem) {
+            $user = Auth::user();
+            
+         
+            $user->point += $redeem->points;
+            $user->save();
+
+
+            $redeem->update(['is_used' => true]);
+
+            return back()->with('success', 'Berhasil! ' . $redeem->points . ' poin telah ditambahkan.');
+        }
+
+        return back()->with('error', 'Kode tidak valid atau sudah digunakan.');
     }
 }
