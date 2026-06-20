@@ -174,6 +174,7 @@
 @php
     $level = Auth::user()->membership_level ?? 'Bronze';
     $discount = ($level == 'Gold') ? 0.45 : (($level == 'Silver') ? 0.25 : 0);
+    function getPrice($base, $discount) { return $base * (1 - $discount); }
 @endphp
 
 <div class="navbar">
@@ -204,12 +205,7 @@
 
     <div class="content">
         <h2>Best Seller !! (Tier: {{ $level }})</h2>
-       <div class="product-grid">
-
-    {{-- Fungsi Helper untuk menghitung diskon --}}
-    @php
-        function getPrice($base, $discount) { return $base * (1 - $discount); }
-    @endphp
+        <div class="product-grid">
 
     <div class="product-card">
         <img src="{{ asset('images/kopi.jpg') }}" alt="Kopi">
@@ -227,6 +223,15 @@
                 <input type="hidden" name="qty[]" value="1">
                 <input type="hidden" name="price[]" value="{{ getPrice(8000, $discount) }}">
                 <button type="submit">Beli</button>
+            </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Milk">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="80">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (80 Poin)
+                </button>
             </form>
         </div>
     </div>
@@ -248,6 +253,15 @@
                 <input type="hidden" name="price[]" value="{{ getPrice(10000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Sugar">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="100">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (100 Poin)
+                </button>
+            </form>
         </div>
     </div>
 
@@ -267,6 +281,15 @@
                 <input type="hidden" name="qty[]" value="1">
                 <input type="hidden" name="price[]" value="{{ getPrice(12000, $discount) }}">
                 <button type="submit">Beli</button>
+            </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Latte">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="120">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (120 Poin)
+                </button>
             </form>
         </div>
     </div>
@@ -288,6 +311,15 @@
                 <input type="hidden" name="price[]" value="{{ getPrice(10000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Sugar">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="100">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (100 Poin)
+                </button>
+            </form>
         </div>
     </div>
 
@@ -308,6 +340,15 @@
                 <input type="hidden" name="price[]" value="{{ getPrice(8000, $discount) }}">
                 <button type="submit">Beli</button>
             </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Milk">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="80">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (80 Poin)
+                </button>
+            </form>
         </div>
     </div>
 
@@ -327,6 +368,15 @@
                 <input type="hidden" name="qty[]" value="1">
                 <input type="hidden" name="price[]" value="{{ getPrice(12000, $discount) }}">
                 <button type="submit">Beli</button>
+            </form>
+            <form action="{{ route('transaksi.poin') }}" method="POST" style="margin-top: 5px;">
+                @csrf
+                <input type="hidden" name="product_name[]" value="Coffe Latte">
+                <input type="hidden" name="qty[]" value="1">
+                <input type="hidden" name="points_needed[]" value="120">
+                <button type="submit" style="background-color: #f39c12; border: none; padding: 7px; width: 100%; border-radius: 5px; cursor: pointer; color: white; font-size: 13px;">
+                    Tukar (120 Poin)
+                </button>
             </form>
         </div>
     </div>

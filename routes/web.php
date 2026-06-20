@@ -48,3 +48,5 @@ Route::get('/checkout/{id}', [CheckoutController::class, 'checkout'])->name('che
 
 Route::get('/membership/confirm/{tier}', [MembershipController::class, 'checkout']);
 Route::post('/membership/pay/{tier}', [MembershipController::class, 'processPayment']);
+Route::post('/transaksi/poin', [TransactionController::class, 'purchaseWithPoints'])->name('transaksi.poin');
+Route::post('/transaksi/confirm/{id}', [TransactionController::class, 'confirmTransaction'])->name('transaksi.confirm');

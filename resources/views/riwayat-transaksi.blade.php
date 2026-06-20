@@ -24,6 +24,8 @@
             background-color: #f39c12;
             padding: 5px 12px;
             border-radius: 20px;
+            color: white;
+            text-decoration: none;
         }
 
         .layout { display: flex; margin-top: 55px; }
@@ -99,6 +101,7 @@
             cursor: pointer;
             font-size: 13px;
             text-decoration: none;
+            display: inline-block;
         }
 
         .logout-btn { position: fixed; bottom: 20px; right: 20px; }
@@ -183,10 +186,22 @@
                 </table>
 
                 <p style="margin-bottom:5px"><strong>Total: Rp {{ number_format($t->total_price, 0, ',', '.') }}</strong></p>
-                <p style="margin-bottom:10px">Point didapat: <strong>{{ $t->total_point }}</strong></p>
+                
+                @if($t->total_price > 0)
+                    <p style="margin-bottom:10px">Point didapat: <strong>{{ $t->total_point }}</strong></p>
+                @else
+                    <p style="margin-bottom:10px; color:red;">Poin terpakai: <strong>{{ $t->total_point }}</strong></p>
+                @endif
 
                 @if($t->status == 'pending')
-                    <a href="{{ route('checkout', $t->id) }}" class="checkout-btn">Checkout</a>
+                    @if($t->total_price > 0)
+                        <a href="{{ route('checkout', $t->id) }}" class="checkout-btn">Checkout</a>
+                    @else
+                        <form action="{{ route('transaksi.confirm', $t->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="checkout-btn" style="background-color: #f39c12;">Konfirmasi Penukaran</button>
+                        </form>
+                    @endif
                 @endif
             </div>
         @empty
