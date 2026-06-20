@@ -174,7 +174,7 @@
 
 <div class="navbar">
     <span>Welcome, {{ $user->name }}!</span>
-    <a href="/points" class="point">Point: {{ $user->point ?? 0 }}</a>
+    <a href="/points" class="point">Point: {{ Auth::user()->point ?? 0 }}</a>
 </div>
 
 <div class="layout">
